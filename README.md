@@ -1,7 +1,7 @@
 ###YouTube-Player
 
 
-A Qt (C++) Project
+A Qt (C++) application
 
 UNDER DEVELOPMENT
 
