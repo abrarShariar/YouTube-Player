@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file alias="btn-play">resource/play.png</file>
+    </qresource>
+</RCC>
