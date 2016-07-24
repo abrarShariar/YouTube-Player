@@ -61,6 +61,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="toolTip">
+    <string>My playlist</string>
+   </property>
    <property name="text">
     <string>Playlist</string>
    </property>

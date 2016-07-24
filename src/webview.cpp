@@ -8,6 +8,8 @@
 #include<QLabel>
 #include<QFont>
 #include<QDebug>
+#include<QPushButton>
+#include<QIcon>
 
 QScrollArea *sArea;
 
@@ -18,7 +20,9 @@ webview::webview(QWidget *parent) :
     /* Construct the initial window
      */
 
-        //ui->playButton->icon(QIcon(":/resource/play.png"));
+
+        QIcon btnPlay(":/icon/play.png");
+        QIcon btnAdd(":/icon/add.png");
         //initial text display
         QFont font;
         font.setPointSize(15);
@@ -34,6 +38,10 @@ webview::webview(QWidget *parent) :
         sArea->resize(this->width()+50,this->height()-100);
         sArea->setWidget(label);
 
+        //this works
+        //QPushButton *btn=new QPushButton(this);
+        //btn->setIcon(QIcon(":/icon/play.png"));
+
         //set horizontal layout
         QHBoxLayout *layout=new QHBoxLayout;
         layout->addWidget(label);
@@ -43,6 +51,11 @@ webview::webview(QWidget *parent) :
         qDebug()<<this->view->url()<<endl;
 
         ui->setupUi(this);
+        ui->playButton->setIcon(btnPlay);
+        ui->playButton->setIconSize(QSize(ui->playButton->width(),ui->playButton->height()-10));
+        ui->playButton_2->setIcon(btnAdd);
+        ui->playButton_2->setIconSize(QSize(ui->playButton_2->width(),ui->playButton_2->height()-10));
+
 }
 
 webview::~webview()
