@@ -29,6 +29,7 @@ webview::webview(QWidget *parent) :
         QLabel *label=new QLabel;
         label->setFont(font);
         label->setText("Paste the YouTube URL below and PLAY ON !!");
+        //label->setStyleSheet("QLabel { color : #167AC6; }");
         label->setAlignment(Qt::AlignCenter);
 
         //scroll area
@@ -70,15 +71,20 @@ void webview::on_playButton_clicked(){
      * open link in QWebEngineView
      */
 
-
-    //view=new QWebEngineView(this);
-
+    //get URL
     QString text=ui->plainTextEdit->toPlainText();
     if(text=="" || text==" "){
         ui->plainTextEdit->appendPlainText("Please Enter A Valid URL...");
         return;
     }
-    this->view->load(QUrl(ui->plainTextEdit->toPlainText()));
+
+    //get video id
+    QStringList list=text.split('v');
+    QString url="http://www.youtube.com/embed/"+list[1]; //+"?autoplay=1&loop=1&playlist="+list[1];
+
+    qDebug()<<url<<endl;
+
+    this->view->load(QUrl(url));
     this->view->resize(sArea->width(),sArea->height()+10);
     sArea->hide();
     this->view->show();
