@@ -18,17 +18,22 @@ class webview : public QWidget
 
 public:
     explicit webview(QWidget *parent = 0);
+    QWebEngineView *view=new QWebEngineView(this);
+    QString getVideoID(QString);
     ~webview();
 
 
 public slots:
     void on_playButton_clicked();
     void on_playlistButton_clicked();
+    void on_addButton_clicked();
+    void setupWebview(QString);
 
+    void updateUrl();
 private:
     Ui::webview *ui;
+    QUrl viewUrl;
 
-    QWebEngineView *view=new QWebEngineView(this);
 };
 
 #endif // WEBVIEW_H

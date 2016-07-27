@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="plainText">
-    <string>https://www.youtube.com/watch?v=Env4P3T5Q4M</string>
+    <string>http://www.youtube.com</string>
    </property>
   </widget>
   <widget class="QPushButton" name="playButton">
@@ -71,7 +71,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="playButton_2">
+  <widget class="QPushButton" name="addButton">
    <property name="geometry">
     <rect>
      <x>470</x>

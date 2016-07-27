@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     //QMainWindow replaced with QWidget
     webview w;
-
     w.setWindowTitle("YouTube - Player");
     w.show();
 
