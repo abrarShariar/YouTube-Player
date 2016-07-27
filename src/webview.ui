@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="plainText">
-    <string>http://www.youtube.com</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="playButton">
@@ -41,7 +41,7 @@
     </font>
    </property>
    <property name="toolTip">
-    <string>Play</string>
+    <string>Play in Loop</string>
    </property>
    <property name="text">
     <string/>

@@ -26,12 +26,10 @@ webview::webview(QWidget *parent) :
         QLabel *label=new QLabel;
         label->setFont(font);
         label->setText("Paste the YouTube URL below and PLAY ON !!");
-        //label->setStyleSheet("QLabel { color : #167AC6; }");
         label->setAlignment(Qt::AlignCenter);
 
         //scroll area
         sArea=new QScrollArea(this);
-
         sArea->setBackgroundRole(QPalette::Dark);
         sArea->resize(this->width()+50,this->height()-100);
         sArea->setWidget(label);
@@ -44,7 +42,6 @@ webview::webview(QWidget *parent) :
 
         this->setupWebview("http://www.youtube.com");
         connect(this->view,SIGNAL(urlChanged(QUrl)),this,SLOT(updateUrl()));
-
 
         ui->setupUi(this);
         ui->playButton->setIcon(btnPlay);
@@ -60,9 +57,18 @@ webview::~webview()
 
 void webview::updateUrl(){
     //qDebug()<<"webview change"<<endl;
-    QString str=this->view->url().toString();
-    ui->plainTextEdit->setPlainText(str);
-
+    QString videoId;
+    QString strUrl=this->view->url().toString();
+    ui->plainTextEdit->setPlainText(strUrl);
+    int found=strUrl.indexOf("=",0);
+    if(found!=-1){
+        videoId=this->getVideoID(strUrl);
+        strUrl="http://www.youtube.com/embed/v/"+videoId+"?version=3&loop=1&playlist="+videoId;
+        this->loopUrl=strUrl;
+        //-------FIX ASAP------
+        //this->view->load(QUrl(strUrl));
+        //qDebug()<<this->viewUrl<<endl;
+    }
 }
 
 QString webview::getVideoID(QString strUrl){
@@ -73,9 +79,6 @@ QString webview::getVideoID(QString strUrl){
 
 void webview::on_addButton_clicked(){
    QUrl currentUrl=this->view->url();
-
-   //qDebug()<<currentUrl<<endl;
-   //qDebug()<<getVideoID(currentUrl)<<endl;
 }
 
 void webview::on_playButton_clicked(){    
@@ -83,18 +86,21 @@ void webview::on_playButton_clicked(){
      * open link in QWebEngineView
      */
     //get URL
-
-//    if(text=="" || text==" "){
-//        ui->plainTextEdit->appendPlainText("Please Enter A Valid URL...");
-//       return;
-//  }
-
-    //get video id
-    //QString url=this->getVideoID()
-    //QString url="https://www.youtube.com/embed/v="+list[1]+"?autoplay=1&loop=1";
-
-    //this->setupWebview(url);
-    //this->view->show();
+    /*
+     */
+    /*
+    QString text=ui->plainTextEdit->toPlainText();
+    if(text=="" || text==" "){
+        ui->plainTextEdit->appendPlainText("Please Enter A Valid URL...");
+       return;
+    }else{
+        this->view->(this->viewUrl);
+        this->view->show();
+        qDebug()<<this->view->url()<<endl;
+    }
+   */
+    qDebug()<<this->loopUrl<<endl;
+    this->view->setUrl(QUrl(this->loopUrl));
 }
 
 void webview::setupWebview(QString url){

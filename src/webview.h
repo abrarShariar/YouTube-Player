@@ -19,7 +19,9 @@ class webview : public QWidget
 public:
     explicit webview(QWidget *parent = 0);
     QWebEngineView *view=new QWebEngineView(this);
+    bool initialLoad=true;
     QString getVideoID(QString);
+    QString loopUrl;
     ~webview();
 
 
@@ -31,9 +33,8 @@ public slots:
 
     void updateUrl();
 private:
-    Ui::webview *ui;
     QUrl viewUrl;
-
+    Ui::webview *ui;
 };
 
 #endif // WEBVIEW_H
