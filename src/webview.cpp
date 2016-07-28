@@ -1,4 +1,5 @@
 #include "webview.h"
+#include "dialog.h"
 #include "ui_webview.h"
 #include<QWebEngineView>
 #include<QWidget>
@@ -11,6 +12,7 @@
 #include<QIcon>
 
 QScrollArea *sArea;
+int repeatMe=10;
 
 webview::webview(QWidget *parent) :
     QWidget(parent),
@@ -21,6 +23,7 @@ webview::webview(QWidget *parent) :
         QIcon btnPlay(":/icon/play.png");
         QIcon btnAdd(":/icon/add.png");
         QIcon btnHome(":/icon/youtube_icon.png");
+        QIcon btnPlaylist(":/icon/playlist.png");
         //initial text display
         QFont font;
         font.setPointSize(15);
@@ -45,12 +48,15 @@ webview::webview(QWidget *parent) :
         connect(this->view,SIGNAL(urlChanged(QUrl)),this,SLOT(updateUrl()));
 
         ui->setupUi(this);
+        ui->playlistButton->setIcon(btnPlaylist);
         ui->homeButton->setIcon(btnHome);
         ui->homeButton->setIconSize(QSize(ui->homeButton->width(),ui->homeButton->height()-10));
         ui->playButton->setIcon(btnPlay);
         ui->playButton->setIconSize(QSize(ui->playButton->width(),ui->playButton->height()-10));
         ui->addButton->setIcon(btnAdd);
         ui->addButton->setIconSize(QSize(ui->addButton->width(),ui->addButton->height()-10));
+
+        this->setWindowFlags(this->windowFlags() | Qt::WindowMinimizeButtonHint);
 }
 
 webview::~webview()
@@ -68,7 +74,7 @@ void webview::updateUrl(){
         //read http://lifehacker.com/create-a-youtube-playlist-without-an-account-with-this-1688862486
         //strUrl="http://www.youtube.com/embed/"+this->videoId+"?autoplay=1&loop=1&playlist="+this->videoId;
         strUrl="http://www.youtube.com/watch_videos?video_ids="+this->videoId;
-        for(int i=0;i<10;i++){
+        for(int i=0;i<repeatMe;i++){
             strUrl=strUrl+","+this->videoId;
         }
         this->loopUrl=strUrl;
@@ -83,20 +89,28 @@ QString webview::getVideoID(QString strUrl){
 }
 
 void webview::on_addButton_clicked(){
-   QUrl currentUrl=this->view->url();
+  qDebug()<<this->videoId<<endl;
+  qDebug()<<this->view->url()<<endl;
+
+  Dialog *repeatBox=new Dialog(this);
+  repeatBox->setUrl(this->view->url());
+  repeatBox->setWindowTitle("Add to playlist");
+  repeatBox->show();
+
 }
 
-void webview::on_playButton_clicked(){    
-
+void webview::on_playButton_clicked(){        
     //error handling
     QString text=ui->plainTextEdit->toPlainText();
     if(text=="" || text==" "){
         ui->plainTextEdit->appendPlainText("Please Choose A Valid YouTube Video...");
        return;
     }else{
+        //get repeat times input
         //qDebug()<<this->loopUrl<<endl;
         this->view->setUrl(QUrl(this->loopUrl));
         ui->plainTextEdit->setPlainText("http://www.youtube.com/watch?v="+this->videoId);
+
      }
 }
 

@@ -3,5 +3,6 @@
         <file>play.png</file>
         <file>add.png</file>
         <file>youtube_icon.png</file>
+        <file>playlist.png</file>
     </qresource>
 </RCC>

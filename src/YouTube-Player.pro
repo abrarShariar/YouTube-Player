@@ -16,12 +16,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    webview.cpp
+    webview.cpp \
+    dialog.cpp
 
 HEADERS  += \
-    webview.h
+    webview.h \
+    dialog.h
 
-FORMS    +=
+FORMS    += \
+    dialog.ui
 
 RESOURCES += \
     myresources.qrc
