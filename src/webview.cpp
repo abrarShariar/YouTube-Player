@@ -1,5 +1,6 @@
 #include "webview.h"
 #include "dialog.h"
+#include "playlist.h"
 #include "ui_webview.h"
 #include<QWebEngineView>
 #include<QWidget>
@@ -65,14 +66,11 @@ webview::~webview()
 }
 
 void webview::updateUrl(){
-    //qDebug()<<"webview change"<<endl;
     QString strUrl=this->view->url().toString();
     int found=strUrl.indexOf("=",0);
     if(found!=-1){
         this->videoId=this->getVideoID(strUrl);
-        //I am not a pro
         //read http://lifehacker.com/create-a-youtube-playlist-without-an-account-with-this-1688862486
-        //strUrl="http://www.youtube.com/embed/"+this->videoId+"?autoplay=1&loop=1&playlist="+this->videoId;
         strUrl="http://www.youtube.com/watch_videos?video_ids="+this->videoId;
         for(int i=0;i<repeatMe;i++){
             strUrl=strUrl+","+this->videoId;
@@ -89,11 +87,8 @@ QString webview::getVideoID(QString strUrl){
 }
 
 void webview::on_addButton_clicked(){
-  qDebug()<<this->videoId<<endl;
-  qDebug()<<this->view->url()<<endl;
-
   Dialog *repeatBox=new Dialog(this);
-  repeatBox->setUrl(this->view->url());
+  repeatBox->setUrl(ui->plainTextEdit->toPlainText());
   repeatBox->setWindowTitle("Add to playlist");
   repeatBox->show();
 
@@ -123,7 +118,8 @@ void webview::setupWebview(QString url){
 }
 
 void webview::on_playlistButton_clicked(){
-    qDebug()<<"PLAYLIST"<<endl;
+    Playlist *myPlaylist=new Playlist(this);
+    myPlaylist->show();
 }
 
 void webview::on_homeButton_clicked(){
