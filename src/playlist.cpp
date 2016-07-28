@@ -4,6 +4,7 @@
 #include<QDebug>
 #include<QtSql>
 #include<QSqlQuery>
+#include<QMap>
 
 
 Playlist::Playlist(QWidget *parent) :
@@ -24,12 +25,9 @@ Playlist::Playlist(QWidget *parent) :
         int repeatField=query.record().indexOf("repeat");
 
         while(query.next()){
-
             QString url=query.value(urlField).toString();
             QString repeat=query.value(repeatField).toString();
-
-            qDebug()<<url<<endl;
-            qDebug()<<repeat<<endl;
+            this->playlistMap[url]=repeat;
         }
     }
 }

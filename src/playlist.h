@@ -2,6 +2,7 @@
 #define PLAYLIST_H
 
 #include <QDialog>
+#include<QMap>
 
 namespace Ui {
 class Playlist;
@@ -14,6 +15,7 @@ class Playlist : public QDialog
 public:
     explicit Playlist(QWidget *parent = 0);
     ~Playlist();
+    QMap <QString,QString>playlistMap;
 
 private:
     Ui::Playlist *ui;

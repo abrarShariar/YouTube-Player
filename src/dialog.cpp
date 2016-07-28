@@ -48,27 +48,12 @@ void Dialog::on_okButton_clicked(){
     int num=ui->spinBox->value();
     this->setRepeatTimes(num);
 
-    QSqlQuery query;
-    query.prepare("SELECT * FROM MyPlaylist where url=:url");
-    query.bindValue(":url",this->getUrl());
 
-    if(query.exec()){
-     //URL already exists
-       query.prepare("UPDATE MyPlaylist SET repeat=:repeat WHERE url=:url");
-       query.bindValue(":url",this->getUrl());
-       query.bindValue(":repeat",this->getRepeatTimes());
-       query.exec();
-    }else{
-      //new URL
-        query.prepare("INSERT INTO MyPlaylist(url,repeat) values(:url,:repeat)");
-        query.bindValue(":url",this->getUrl());
-        query.bindValue(":repeat",this->getRepeatTimes());
-        query.exec();
-    }
-
+/*
     query.prepare("SELECT * FROM MyPlaylist");
     query.exec();
     while(query.next()){
         qDebug()<<query.value(0).toString()<<endl;
     }
+    */
 }

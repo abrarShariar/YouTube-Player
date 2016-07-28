@@ -11,6 +11,7 @@
 #include<QDebug>
 #include<QPushButton>
 #include<QIcon>
+#include<QMap>
 
 QScrollArea *sArea;
 int repeatMe=10;
@@ -102,7 +103,6 @@ void webview::on_playButton_clicked(){
        return;
     }else{
         //get repeat times input
-        //qDebug()<<this->loopUrl<<endl;
         this->view->setUrl(QUrl(this->loopUrl));
         ui->plainTextEdit->setPlainText("http://www.youtube.com/watch?v="+this->videoId);
 
@@ -119,6 +119,29 @@ void webview::setupWebview(QString url){
 
 void webview::on_playlistButton_clicked(){
     Playlist *myPlaylist=new Playlist(this);
+    myPlaylist->setWindowTitle("My Playlist");
+
+    int X=20,Y=40,width,height=16;
+    int rX=380,rY=40,rWidth=20,rHeight=16;
+    QMapIterator<QString,QString>i(myPlaylist->playlistMap);
+    while(i.hasNext()){
+        i.next();
+        QLabel *urlLabel=new QLabel(myPlaylist);
+        width=i.key().length()+300;
+        urlLabel->setGeometry(X,Y,width,height);
+        urlLabel->setText(i.key());
+        urlLabel->show();
+
+        QLabel *repeatLabel=new QLabel(myPlaylist);
+        repeatLabel->setGeometry(rX,rY,rWidth,rHeight);
+        repeatLabel->setText(i.value());
+        repeatLabel->show();
+        Y+=25;
+        rY+=25;
+        //qDebug()<<i.key()<<" : "<<i.value()<<endl;
+    }
+
+
     myPlaylist->show();
 }
 
