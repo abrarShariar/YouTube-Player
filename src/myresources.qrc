@@ -2,5 +2,6 @@
     <qresource prefix="/icon">
         <file>play.png</file>
         <file>add.png</file>
+        <file>youtube_icon.png</file>
     </qresource>
 </RCC>

@@ -22,10 +22,12 @@ public:
     bool initialLoad=true;
     QString getVideoID(QString);
     QString loopUrl;
+    QString videoId="";
     ~webview();
 
 
 public slots:
+    void on_homeButton_clicked();
     void on_playButton_clicked();
     void on_playlistButton_clicked();
     void on_addButton_clicked();

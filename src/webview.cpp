@@ -20,6 +20,7 @@ webview::webview(QWidget *parent) :
      */
         QIcon btnPlay(":/icon/play.png");
         QIcon btnAdd(":/icon/add.png");
+        QIcon btnHome(":/icon/youtube_icon.png");
         //initial text display
         QFont font;
         font.setPointSize(15);
@@ -44,6 +45,8 @@ webview::webview(QWidget *parent) :
         connect(this->view,SIGNAL(urlChanged(QUrl)),this,SLOT(updateUrl()));
 
         ui->setupUi(this);
+        ui->homeButton->setIcon(btnHome);
+        ui->homeButton->setIconSize(QSize(ui->homeButton->width(),ui->homeButton->height()-10));
         ui->playButton->setIcon(btnPlay);
         ui->playButton->setIconSize(QSize(ui->playButton->width(),ui->playButton->height()-10));
         ui->addButton->setIcon(btnAdd);
@@ -57,17 +60,19 @@ webview::~webview()
 
 void webview::updateUrl(){
     //qDebug()<<"webview change"<<endl;
-    QString videoId;
     QString strUrl=this->view->url().toString();
-    ui->plainTextEdit->setPlainText(strUrl);
     int found=strUrl.indexOf("=",0);
     if(found!=-1){
-        videoId=this->getVideoID(strUrl);
-        strUrl="http://www.youtube.com/embed/v/"+videoId+"?version=3&loop=1&playlist="+videoId;
+        this->videoId=this->getVideoID(strUrl);
+        //I am not a pro
+        //read http://lifehacker.com/create-a-youtube-playlist-without-an-account-with-this-1688862486
+        //strUrl="http://www.youtube.com/embed/"+this->videoId+"?autoplay=1&loop=1&playlist="+this->videoId;
+        strUrl="http://www.youtube.com/watch_videos?video_ids="+this->videoId;
+        for(int i=0;i<10;i++){
+            strUrl=strUrl+","+this->videoId;
+        }
         this->loopUrl=strUrl;
-        //-------FIX ASAP------
-        //this->view->load(QUrl(strUrl));
-        //qDebug()<<this->viewUrl<<endl;
+        ui->plainTextEdit->setPlainText("http://www.youtube.com/watch?v="+this->videoId);
     }
 }
 
@@ -82,25 +87,17 @@ void webview::on_addButton_clicked(){
 }
 
 void webview::on_playButton_clicked(){    
-    /* read url link
-     * open link in QWebEngineView
-     */
-    //get URL
-    /*
-     */
-    /*
+
+    //error handling
     QString text=ui->plainTextEdit->toPlainText();
     if(text=="" || text==" "){
-        ui->plainTextEdit->appendPlainText("Please Enter A Valid URL...");
+        ui->plainTextEdit->appendPlainText("Please Choose A Valid YouTube Video...");
        return;
     }else{
-        this->view->(this->viewUrl);
-        this->view->show();
-        qDebug()<<this->view->url()<<endl;
-    }
-   */
-    qDebug()<<this->loopUrl<<endl;
-    this->view->setUrl(QUrl(this->loopUrl));
+        //qDebug()<<this->loopUrl<<endl;
+        this->view->setUrl(QUrl(this->loopUrl));
+        ui->plainTextEdit->setPlainText("http://www.youtube.com/watch?v="+this->videoId);
+     }
 }
 
 void webview::setupWebview(QString url){
@@ -113,4 +110,9 @@ void webview::setupWebview(QString url){
 
 void webview::on_playlistButton_clicked(){
     qDebug()<<"PLAYLIST"<<endl;
+}
+
+void webview::on_homeButton_clicked(){
+    this->view->setUrl(QUrl("http://www.youtube.com/"));
+    ui->plainTextEdit->setPlainText("http://www.youtube.com/");
 }
