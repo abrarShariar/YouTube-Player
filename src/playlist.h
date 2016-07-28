@@ -15,7 +15,13 @@ class Playlist : public QDialog
 public:
     explicit Playlist(QWidget *parent = 0);
     ~Playlist();
-    QMap <QString,QString>playlistMap;
+
+    QString playAllUrl;
+    QMap<QString,QString>playlistMap;
+
+public slots:
+    void on_playButton_clicked();
+    void on_removeButton_clicked();
 
 private:
     Ui::Playlist *ui;

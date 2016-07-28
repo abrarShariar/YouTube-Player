@@ -138,10 +138,7 @@ void webview::on_playlistButton_clicked(){
         repeatLabel->show();
         Y+=25;
         rY+=25;
-        //qDebug()<<i.key()<<" : "<<i.value()<<endl;
     }
-
-
     myPlaylist->show();
 }
 

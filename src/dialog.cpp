@@ -47,7 +47,11 @@ int Dialog::getRepeatTimes(){
 void Dialog::on_okButton_clicked(){
     int num=ui->spinBox->value();
     this->setRepeatTimes(num);
-
+    QSqlQuery query;
+    query.prepare("INSERT INTO MyPlaylist(url,repeat) values(:url,:repeat)");
+    query.bindValue(":url",this->playlistUrl);
+    query.bindValue(":repeat",this->getRepeatTimes());
+    query.exec();
 
 /*
     query.prepare("SELECT * FROM MyPlaylist");

@@ -17,7 +17,6 @@ public:
     ~Dialog();
 
     QString playlistUrl;
-
     int getRepeatTimes();
     void setRepeatTimes(int);
     void setUrl(QUrl);
