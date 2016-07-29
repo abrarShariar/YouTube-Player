@@ -10,6 +10,10 @@ A customizable "YouTube-Player" with some handy features. Built on Qt v.5.7, wri
 
 ## How to build and run
 
+
+If you have **Qt-Creator** on your machine, you can grab the [source code](https://github.com/abrarShariar/YouTube-Player/archive/master.zip) and open [YouTube-Player.pro](https://github.com/abrarShariar/YouTube-Player/blob/master/src/YouTube-Player.pro)
+
+
 ### Linux:
 	
   
