@@ -15,9 +15,22 @@ If you have **Qt-Creator** on your machine, you can grab the [source code](https
 
 
 ### Linux:
-	
+
+Grab [linux-build.tar.gz]() 
+
+```bash
+ tar -xzvf linux-build.tar.gz youtube-player
+
+ cd youtube-player
+
+./launch.sh
+```
+
+You are ready to PLAY with YouTube-Player !!
   
-### Windows: 
+### Windows:
+
+*Coming Soon*
     
 
 
@@ -48,7 +61,6 @@ If you have **Qt-Creator** on your machine, you can grab the [source code](https
 
 - improve "Playlist" interface
 - Add features to "Playlist"
-- Static build for linux
 - Package for Windows
  
 
