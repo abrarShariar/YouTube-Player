@@ -43,3 +43,14 @@ If you have **Qt-Creator** on your machine, you can grab the [source code](https
 - [playlist.cpp](https://github.com/abrarShariar/YouTube-Player/blob/master/src/playlist.cpp) implements the customizable **Playlist** (the GUI needs much improvement,its kept minimal for now)
 	
 
+
+### To-Do:
+
+- improve "Playlist" interface
+- Add features to "Playlist"
+- Static build for linux
+- Package for Windows
+ 
+
+
+
