@@ -23,6 +23,8 @@ public:
     QString getVideoID(QString);
     QString loopUrl;
     QString videoId="";
+
+   // void loadPlaylist();
     ~webview();
 
 
@@ -32,8 +34,9 @@ public slots:
     void on_playlistButton_clicked();
     void on_addButton_clicked();
     void setupWebview(QString);
-
     void updateUrl();
+    void loadPlaylist(QString);
+
 private:
     QUrl viewUrl;
     Ui::webview *ui;

@@ -8,6 +8,8 @@
 #include<QSqlQuery>
 #include<QMap>
 #include<QString>
+#include<QSignalMapper>
+
 
 Playlist::Playlist(QWidget *parent) :
     QDialog(parent),
@@ -31,14 +33,9 @@ Playlist::Playlist(QWidget *parent) :
             this->playlistMap[url]=repeat;
         }
     }
-}
 
-Playlist::~Playlist()
-{
-    delete ui;
-}
+    //send playall url to webview (signal slot)
 
-void Playlist::on_playButton_clicked(){
     QMapIterator<QString,QString>i(this->playlistMap);
     //strUrl="http://www.youtube.com/watch_videos?video_ids="+this->videoId;
     this->playAllUrl="http://www.youtube.com/watch_videos?video_ids=";
@@ -53,7 +50,23 @@ void Playlist::on_playButton_clicked(){
             this->playAllUrl=this->playAllUrl+list[1]+",";
         }
     }
+    //send playall url to webview (signal slot)
+    /*signal slot handling
+     * signal emits the event play all button click
+     * slot to catch the playlist url and load in webengine view
+     */
+    //connect(this->ui->playButton,SIGNAL(clicked()),this,SLOT(setPlayUrl()));
 
+    QSignalMapper* signalMapper=new QSignalMapper(this);
+    connect(this->ui->playButton,SIGNAL(clicked()),signalMapper,SLOT(map()));
+
+    signalMapper->setMapping(this->ui->playButton,this->playAllUrl);
+    connect(signalMapper,SIGNAL(mapped(QString)),this->parentWidget(),SLOT(loadPlaylist(QString)));
+}
+
+Playlist::~Playlist()
+{
+    delete ui;
 }
 
 void Playlist::on_removeButton_clicked(){
@@ -62,3 +75,11 @@ void Playlist::on_removeButton_clicked(){
     query.exec();
     this->playlistMap.clear();
 }
+void Playlist::on_playButton_clicked(){
+    this->close();
+}
+
+void Playlist::setPlaylistUrl(){
+
+}
+

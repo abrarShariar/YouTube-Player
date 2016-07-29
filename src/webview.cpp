@@ -146,3 +146,8 @@ void webview::on_homeButton_clicked(){
     this->view->setUrl(QUrl("http://www.youtube.com/"));
     ui->plainTextEdit->setPlainText("http://www.youtube.com/");
 }
+
+void webview::loadPlaylist(QString url){
+    //qDebug()<<url<<endl;
+    this->view->setUrl(QUrl(url));
+}

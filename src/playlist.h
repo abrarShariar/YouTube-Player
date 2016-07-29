@@ -20,8 +20,9 @@ public:
     QMap<QString,QString>playlistMap;
 
 public slots:
-    void on_playButton_clicked();
     void on_removeButton_clicked();
+    void on_playButton_clicked();
+    void setPlaylistUrl();
 
 private:
     Ui::Playlist *ui;

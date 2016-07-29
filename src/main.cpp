@@ -15,6 +15,5 @@ int main(int argc, char *argv[])
     webview w;
     w.setWindowTitle("YouTube - Player");
     w.show();
-
     return a.exec();
 }
