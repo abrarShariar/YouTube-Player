@@ -1,6 +1,6 @@
-# [YouTube-Player]()
+# YouTube-Player
 
-A customizable "YouTube-Player" with some handy features. Built on Qt v.5.7, written in C++. [Download & Play]() 
+A customizable "YouTube-Player" with some handy features. Built on Qt v.5.7, written in C++. 
 
 
 ## Preview
@@ -16,7 +16,7 @@ If you have **Qt-Creator** on your machine, you can grab the [source code](https
 
 ### Linux:
 
-Grab [linux-build.tar.gz]() 
+Grab [linux-build.tar.gz](https://github.com/abrarShariar/YouTube-Player/raw/master/linux-build.tar.gz) 
 
 ```bash
  tar -xzvf linux-build.tar.gz youtube-player
