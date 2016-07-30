@@ -19,9 +19,9 @@ If you have **Qt-Creator** on your machine, you can grab the [source code](https
 Grab [linux-build.tar.gz](https://github.com/abrarShariar/YouTube-Player/raw/master/linux-build.tar.gz) 
 
 ```bash
- tar -xzvf linux-build.tar.gz youtube-player
+ tar -xzvf linux-build.tar.gz
 
- cd youtube-player
+ cd linux-build
 
 ./launch.sh
 ```
